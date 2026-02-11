@@ -100,7 +100,7 @@ In `frontend/.env` (or your hosting platform):
 
 ```
 REACT_APP_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-REACT_APP_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+REACT_APP_SUPABASE_ANON_KEY=your-anon-key-from-supabase-dashboard
 ```
 
 ---
@@ -202,9 +202,11 @@ See **[docs/STRIPE_SETUP.md](STRIPE_SETUP.md)** for full details. Summary:
 **Option B: Netlify**
 
 1. Connect repo.
-2. Build command: `cd frontend && yarn build`
-3. Publish directory: `frontend/build`
-4. Add env vars in Site settings.
+2. Build command: `cd frontend && yarn build` (or use `netlify.toml` with `base = "frontend"`).
+3. Publish directory: `frontend/build` (or `build` if base is `frontend`).
+4. Add env vars in Site settings: `REACT_APP_SUPABASE_URL`, `REACT_APP_SUPABASE_ANON_KEY`.
+5. **Secrets scanner fix:** Netlify blocks builds when it detects keys in the output. The Supabase anon key is public by design (it goes in the frontend bundle). Add this env var to allow it:
+   - **SECRETS_SCAN_OMIT_KEYS** = `REACT_APP_SUPABASE_ANON_KEY,REACT_APP_SUPABASE_URL`
 
 **Option C: Static hosting (S3, GitHub Pages, etc.)**
 
