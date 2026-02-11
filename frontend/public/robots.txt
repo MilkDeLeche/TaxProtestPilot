@@ -1,0 +1,6 @@
+# Tax Protest Pilot - Property Tax Protest Software
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://taxprotestpilot.com/sitemap.xml

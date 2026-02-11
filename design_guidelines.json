@@ -1,0 +1,173 @@
+{
+  "design_system": {
+    "typography": {
+      "font_family": {
+        "heading": "Manrope, sans-serif",
+        "body": "Inter, sans-serif"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-extrabold tracking-tight leading-tight",
+        "h2": "text-4xl md:text-5xl font-bold tracking-tight",
+        "h3": "text-2xl md:text-3xl font-semibold",
+        "body_large": "text-lg md:text-xl leading-relaxed text-slate-600",
+        "body_default": "text-base leading-relaxed text-slate-600",
+        "caption": "text-sm font-medium tracking-wide uppercase text-slate-500"
+      }
+    },
+    "colors": {
+      "palette": {
+        "primary": {
+          "DEFAULT": "#1e40af",
+          "foreground": "#ffffff",
+          "hover": "#1e3a8a"
+        },
+        "secondary": {
+          "DEFAULT": "#f1f5f9",
+          "foreground": "#0f172a"
+        },
+        "background": {
+          "DEFAULT": "#f8fafc",
+          "dark": "#0f172a"
+        },
+        "glass": {
+          "surface": "rgba(255, 255, 255, 0.7)",
+          "border": "rgba(255, 255, 255, 0.5)",
+          "blur": "backdrop-blur-xl"
+        }
+      }
+    },
+    "visual_enhancers": {
+      "glassmorphism": "bg-white/70 backdrop-blur-xl border border-white/40 shadow-xl",
+      "glass_dark": "bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-2xl",
+      "gradients": {
+        "hero": "bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900",
+        "subtle": "bg-gradient-to-b from-slate-50 to-white"
+      },
+      "shadows": {
+        "card": "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+        "floating": "shadow-[0_20px_50px_rgb(0,0,0,0.1)]"
+      },
+      "radius": "rounded-2xl"
+    }
+  },
+  "layout_strategies": {
+    "spacing": {
+      "section_padding": "py-24 md:py-32",
+      "container_padding": "px-6 md:px-12",
+      "element_gap": "gap-8"
+    },
+    "grids": {
+      "bento_features": "grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8",
+      "pricing": "grid grid-cols-1 md:grid-cols-3 gap-8"
+    }
+  },
+  "components": {
+    "Navbar": {
+      "path": "/app/frontend/src/components/landing/Navbar.js",
+      "style": "fixed top-0 w-full z-50 transition-all duration-300",
+      "variant": "glass_sticky",
+      "instructions": "Logo on left (Manrope Bold), Links center (hidden mobile), CTA 'Get Started' (primary) on right. Mobile menu hamburger."
+    },
+    "HeroSection": {
+      "path": "/app/frontend/src/components/landing/Hero.js",
+      "style": "relative min-h-screen flex items-center justify-center overflow-hidden pt-20",
+      "content": {
+        "headline": "Tax Intelligence for the Modern Professional",
+        "subheadline": "Automate property tax assessments, client management, and savings calculations in one crystal-clear dashboard.",
+        "cta_primary": "Get Started Free",
+        "cta_secondary": "View Demo"
+      },
+      "visuals": {
+        "background": "Deep Blue Gradient (#1e40af base)",
+        "main_image": "Abstract dashboard glass card floating",
+        "decoration": "Subtle glowing orbs or mesh gradient in background"
+      }
+    },
+    "FeaturesSection": {
+      "path": "/app/frontend/src/components/landing/Features.js",
+      "style": "py-32 bg-slate-50",
+      "layout": "Bento Grid (Mode A)",
+      "items": [
+        {
+          "title": "Smart CSV Import",
+          "desc": "Drag, drop, done. Intelligent parsing for bulk property data.",
+          "icon": "FileText",
+          "span": "col-span-1 md:col-span-2"
+        },
+        {
+          "title": "Instant Savings Calc",
+          "desc": "Real-time algorithms predict tax reduction potential.",
+          "icon": "Calculator",
+          "span": "col-span-1"
+        },
+        {
+          "title": "Client Portal",
+          "desc": "Secure access for your clients to view status.",
+          "icon": "Users",
+          "span": "col-span-1"
+        },
+        {
+          "title": "Automated Appeals",
+          "desc": "Generate appeal documents in one click.",
+          "icon": "Gavel",
+          "span": "col-span-1 md:col-span-2"
+        }
+      ]
+    },
+    "HowItWorksSection": {
+      "path": "/app/frontend/src/components/landing/HowItWorks.js",
+      "style": "py-24 bg-white",
+      "steps": [
+        "Upload Data",
+        "Analyze Savings",
+        "Generate Reports"
+      ]
+    },
+    "PricingSection": {
+      "path": "/app/frontend/src/components/landing/Pricing.js",
+      "style": "py-24 bg-slate-50",
+      "cards": "Glassmorphism style on white bg (use heavy shadow)"
+    },
+    "CTASection": {
+      "path": "/app/frontend/src/components/landing/CTA.js",
+      "style": "py-24 bg-blue-900 text-white relative overflow-hidden",
+      "content": "Ready to modernize your tax practice?"
+    },
+    "Footer": {
+      "path": "/app/frontend/src/components/landing/Footer.js",
+      "style": "bg-slate-950 text-slate-400 py-16"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1767556246687-dc15b262a42e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBvZmZpY2UlMjBza3lzY3JhcGVyJTIwYmx1ZSUyMGdsYXNzfGVufDB8fHx8MTc3MDQ0ODYwOHww&ixlib=rb-4.1.0&q=85",
+      "accountant_portrait": "https://images.unsplash.com/photo-1736939681295-bb2e6759dddc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBhY2NvdW50YW50JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzcwNDQ4NjEzfDA&ixlib=rb-4.1.0&q=85",
+      "team_meeting": "https://images.unsplash.com/photo-1760611656007-f767a8082758?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHRlYW0lMjBtZWV0aW5nJTIwbW9kZXJufGVufDB8fHx8MTc3MDQ0ODYxN3ww&ixlib=rb-4.1.0&q=85"
+    },
+    "icons_library": "lucide-react"
+  },
+  "instructions_to_main_agent": [
+    "Use 'framer-motion' for all scroll animations (fade-in-up).",
+    "Ensure the 'Get Started' button links to '/login'.",
+    "Do NOT use standard Bootstrap-like grids. Use the Bento Grid defined in layout_strategies.",
+    "Apply the 'glassmorphism' class utility defined in visual_enhancers to cards.",
+    "Use the provided image URLs for the respective sections.",
+    "Ensure all text meets APCA contrast standards, especially on the blue background.",
+    "Create a 'LandingPage.js' that composes all these sections.",
+    "Update 'App.js' to route '/' to LandingPage.",
+    "Use 'lucide-react' for icons."
+  ],
+  "universal_guidelines": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all.",
+    "You MUST NOT center align the app container.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations.",
+    "NEVER: use AI assistant Emoji characters.",
+    "Every interaction needs micro-animations.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary."
+  ]
+}

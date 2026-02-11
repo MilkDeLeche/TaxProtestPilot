@@ -1,0 +1,8 @@
+# Run the TaxPilot API (uses app.py and app.db)
+# pip install -r requirements-api.txt && uvicorn api:app --reload --port 8000
+fastapi>=0.110.0
+uvicorn>=0.25.0
+pyjwt>=2.10.0
+python-multipart>=0.0.9
+pydantic>=2.0.0
+pandas>=2.0.0
