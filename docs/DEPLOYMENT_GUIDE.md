@@ -103,6 +103,16 @@ REACT_APP_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 REACT_APP_SUPABASE_ANON_KEY=your-anon-key-from-supabase-dashboard
 ```
 
+### Step 6: hCaptcha (optional bot protection)
+
+To protect sign-in/sign-up from bots:
+
+1. Sign up at [hCaptcha](https://www.hcaptcha.com/) and create a site; copy the **Sitekey** and **Secret key**.
+2. In Supabase Dashboard → **Authentication** → **Bot and Abuse Protection** → enable CAPTCHA, select hCaptcha, and paste the **Secret key**.
+3. Add to `frontend/.env`: `REACT_APP_HCAPTCHA_SITEKEY=your-sitekey`
+
+If `REACT_APP_HCAPTCHA_SITEKEY` is not set, the captcha is hidden and sign-in works without it.
+
 ---
 
 ## 3. Stripe Setup

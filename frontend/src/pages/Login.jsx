@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useAuth } from '../context/AuthContext';
 import { MotionButton } from '../components/MotionButton';
 import { GlowEffect } from '../components/ui/glow-effect';
+
+const HCAPTCHA_SITEKEY = process.env.REACT_APP_HCAPTCHA_SITEKEY;
 
 export default function Login() {
   const navigate = useNavigate();
@@ -16,6 +19,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [bgLoaded, setBgLoaded] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const captchaRef = useRef(null);
 
   const BG_IMAGE = '/images/abstract-pastel-holographic-blurred-grainy-gradien-2026-01-08-07-39-02-utc.jpg';
 
@@ -61,6 +66,10 @@ export default function Login() {
       setError(isSignUpMode ? 'Please enter email and password.' : 'Please enter your email and password.');
       return;
     }
+    if (HCAPTCHA_SITEKEY && !captchaToken) {
+      setError('Please complete the captcha verification.');
+      return;
+    }
     if (isSignUpMode) {
       if (password.length < 6) {
         setError('Password must be at least 6 characters.');
@@ -74,17 +83,23 @@ export default function Login() {
     try {
       setIsSigningIn(true);
       if (isSignUpMode) {
-        await signUpWithEmail(trimmedEmail, password);
+        await signUpWithEmail(trimmedEmail, password, captchaToken || undefined);
         setError(null);
         setEmail('');
         setPassword('');
         setConfirmPassword('');
+        setCaptchaToken(null);
+        if (captchaRef.current) captchaRef.current.resetCaptcha();
         setError('Check your email to confirm your account, then sign in below.');
       } else {
-        await signInWithEmail(trimmedEmail, password);
+        await signInWithEmail(trimmedEmail, password, captchaToken || undefined);
+        setCaptchaToken(null);
+        if (captchaRef.current) captchaRef.current.resetCaptcha();
       }
     } catch (err) {
       setError(err.message || 'Something went wrong.');
+      setCaptchaToken(null);
+      if (captchaRef.current) captchaRef.current.resetCaptcha();
     } finally {
       setIsSigningIn(false);
     }
@@ -196,6 +211,17 @@ export default function Login() {
                       className="block w-full rounded-md bg-white/10 px-2.5 py-1.5 text-sm text-white outline outline-1 -outline-offset-1 outline-white/20 placeholder:text-white/50 focus:outline-2 focus:-outline-offset-2 focus:outline-white/40"
                     />
                   </div>
+                </div>
+              )}
+
+              {HCAPTCHA_SITEKEY && (
+                <div className="flex justify-center">
+                  <HCaptcha
+                    ref={captchaRef}
+                    sitekey={HCAPTCHA_SITEKEY}
+                    onVerify={(token) => setCaptchaToken(token)}
+                    onExpire={() => setCaptchaToken(null)}
+                  />
                 </div>
               )}
 

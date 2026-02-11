@@ -4,6 +4,6 @@
 INSERT INTO public.subscriptions (user_id, plan)
 SELECT id, 'enterprise'
 FROM auth.users
-WHERE email = '@gmail.com'
+WHERE email = 'co.estrada01@gmail.com'
 ON CONFLICT (user_id) DO UPDATE
   SET plan = 'enterprise', updated_at = now();

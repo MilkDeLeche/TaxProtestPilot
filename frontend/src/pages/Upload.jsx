@@ -112,6 +112,7 @@ export default function Upload() {
 
   const { user, apiToken, apiBaseUrl } = useAuth();
   const isSupabaseUser = user?.id && user.id !== 'demo-user-id' && !apiToken;
+  const isDemo = user?.id === 'demo-user-id';
   const UPLOAD_HINT_KEY = 'taxpilot_upload_hint_dismissed';
   const [hintDismissed, setHintDismissed] = useState(() => typeof localStorage !== 'undefined' && localStorage.getItem(UPLOAD_HINT_KEY) === '1');
   const navigate = useNavigate();
@@ -626,14 +627,16 @@ export default function Upload() {
                   Calculation Results
                 </h2>
                 <div className="flex flex-wrap gap-2">
-                  <MotionButton
-                    variant="outline"
-                    onClick={handleExportResults}
-                    data-testid="export-results-btn"
-                  >
-                    <ArrowDownTrayIcon className="w-4 h-4 mr-2" />
-                    Export CSV
-                  </MotionButton>
+                  {!isDemo && (
+                    <MotionButton
+                      variant="outline"
+                      onClick={handleExportResults}
+                      data-testid="export-results-btn"
+                    >
+                      <ArrowDownTrayIcon className="w-4 h-4 mr-2" />
+                      Export CSV
+                    </MotionButton>
+                  )}
                   {(apiToken && apiBaseUrl || isSupabaseUser) && (
                     <>
                       <input

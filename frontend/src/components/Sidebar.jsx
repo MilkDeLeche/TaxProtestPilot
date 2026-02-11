@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -8,10 +9,12 @@ import {
   Squares2X2Icon,
   RectangleStackIcon,
   UserIcon,
+  Bars3Icon,
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../context/AuthContext';
 import { cn } from '../lib/utils';
 import FloatingActionMenu from './ui/floating-action-menu';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from './ui/sheet';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: Squares2X2Icon },
@@ -24,18 +27,102 @@ const navItems = [
 export const Sidebar = () => {
   const { signOut, user } = useAuth();
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
     navigate('/login');
   };
 
+  const mobileNavLinks = navItems.map((item) => (
+    <NavLink
+      key={item.path}
+      to={item.path}
+      data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+      onClick={() => setMobileMenuOpen(false)}
+      className={({ isActive }) =>
+        cn(
+          'flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200',
+          isActive
+            ? 'bg-[#1e40af] text-white shadow-lg shadow-blue-900/30'
+            : 'text-slate-700 hover:text-[#1e40af] hover:bg-slate-100'
+        )
+      }
+    >
+      <item.icon className="w-5 h-5 flex-shrink-0" />
+      <span className="font-medium">{item.label}</span>
+    </NavLink>
+  ));
+
   return (
-    <motion.aside
+    <>
+      {/* Mobile header */}
+      <header className="md:hidden fixed top-0 left-0 right-0 h-14 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200 flex items-center justify-between px-4">
+        <button
+          type="button"
+          onClick={() => setMobileMenuOpen(true)}
+          className="p-2 -ml-2 rounded-lg text-slate-600 hover:bg-slate-100"
+          aria-label="Open menu"
+        >
+          <Bars3Icon className="w-6 h-6" />
+        </button>
+        <NavLink to="/dashboard" className="flex-shrink-0">
+          <img
+            src="/images/TAXPILOT2.png"
+            alt="Tax Protest Pilot"
+            className="h-10 w-auto object-contain"
+          />
+        </NavLink>
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#1e40af] to-[#1e3a8a] flex items-center justify-center text-white font-medium text-sm flex-shrink-0">
+          {user?.email?.charAt(0).toUpperCase() || 'U'}
+        </div>
+      </header>
+
+      {/* Mobile nav sheet */}
+      <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <SheetContent side="left" className="w-72 p-0 flex flex-col">
+          <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+          <SheetDescription className="sr-only">Navigate to dashboard, upload, saved uploads, customers, and settings</SheetDescription>
+          <SheetHeader className="p-6 pb-4 border-b border-slate-200">
+            <div className="flex items-center">
+              <img
+                src="/images/TAXPILOT2.png"
+                alt="Tax Protest Pilot"
+                className="h-10 w-auto object-contain"
+              />
+            </div>
+          </SheetHeader>
+          <nav className="flex-1 overflow-y-auto p-4 space-y-1">
+            {mobileNavLinks}
+          </nav>
+          <div className="p-4 border-t border-slate-200 space-y-2">
+            <button
+              type="button"
+              onClick={() => { setMobileMenuOpen(false); navigate('/settings'); }}
+              className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-100"
+            >
+              <UserIcon className="w-5 h-5" />
+              <span className="font-medium">Profile</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => { setMobileMenuOpen(false); handleSignOut(); }}
+              data-testid="logout-btn"
+              className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-slate-700 hover:bg-slate-100"
+            >
+              <ArrowRightOnRectangleIcon className="w-5 h-5" />
+              <span className="font-medium">Sign out</span>
+            </button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Desktop sidebar */}
+      <motion.aside
       initial={{ x: -264 }}
       animate={{ x: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed left-0 top-0 h-full w-64 bg-gradient-to-br from-[#0f172a] via-[#1e3a8a]/95 to-[#0f172a] backdrop-blur-xl border-r border-white/10 text-white p-6 flex flex-col z-50 shadow-2xl shadow-blue-900/20"
+      className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-gradient-to-br from-[#0f172a] via-[#1e3a8a]/95 to-[#0f172a] backdrop-blur-xl border-r border-white/10 text-white p-6 flex-col z-50 shadow-2xl shadow-blue-900/20"
     >
       {/* Logo */}
       <div className="mb-10 flex-shrink-0">
@@ -103,5 +190,6 @@ export const Sidebar = () => {
         />
       </div>
     </motion.aside>
+    </>
   );
 };

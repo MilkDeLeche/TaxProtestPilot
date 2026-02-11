@@ -264,18 +264,6 @@ export default function Batches() {
       setMessage('File downloaded. Import it in QuickBooks (File → Import).');
     };
 
-    if (isDemo && rows.length > 0) {
-      setExporting(true);
-      setMessage(null);
-      try {
-        doExportQB(selectedBatch, rows);
-      } catch (err) {
-        setMessage('Export failed.');
-      } finally {
-        setExporting(false);
-      }
-      return;
-    }
     if (isSupabaseUser && rows.length > 0) {
       setExporting(true);
       setMessage(null);
@@ -577,22 +565,26 @@ export default function Batches() {
             >
               {saving ? 'Saving…' : <><DocumentArrowDownIcon className="w-4 h-4 mr-2" /> Save changes</>}
             </MotionButton>
-            <MotionButton
-              variant="gradient"
-              onClick={() => handleDownloadQB(false)}
-              disabled={exporting}
-              className="min-w-[200px]"
-            >
-              <ArrowDownTrayIcon className="w-4 h-4 mr-2" />
-              {exporting ? 'Preparing…' : 'Export to QuickBooks'}
-            </MotionButton>
-            <MotionButton
-              variant="outline"
-              onClick={() => handleDownloadQB(true)}
-              disabled={exporting}
-            >
-              {exporting ? 'Exporting…' : 'Export & update invoice number'}
-            </MotionButton>
+            {!isDemo && (
+              <>
+                <MotionButton
+                  variant="gradient"
+                  onClick={() => handleDownloadQB(false)}
+                  disabled={exporting}
+                  className="min-w-[200px]"
+                >
+                  <ArrowDownTrayIcon className="w-4 h-4 mr-2" />
+                  {exporting ? 'Preparing…' : 'Export to QuickBooks'}
+                </MotionButton>
+                <MotionButton
+                  variant="outline"
+                  onClick={() => handleDownloadQB(true)}
+                  disabled={exporting}
+                >
+                  {exporting ? 'Exporting…' : 'Export & update invoice number'}
+                </MotionButton>
+              </>
+            )}
             <MotionButton
               variant="outline"
               onClick={() => handleDeleteBatch(selectedBatch)}
@@ -603,9 +595,11 @@ export default function Batches() {
               {deleting ? 'Deleting…' : 'Delete upload'}
             </MotionButton>
           </div>
-          <p className="text-xs text-slate-500 mb-6">
-            In QuickBooks: File → Import → select the downloaded CSV.
-          </p>
+          {!isDemo && (
+            <p className="text-xs text-slate-500 mb-6">
+              In QuickBooks: File → Import → select the downloaded CSV.
+            </p>
+          )}
           <div className="overflow-x-auto max-h-[420px] overflow-y-auto">
             <Table>
               <TableHeader>

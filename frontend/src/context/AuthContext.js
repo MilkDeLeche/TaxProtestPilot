@@ -123,21 +123,25 @@ export function AuthProvider({ children }) {
   };
 
   /** Sign up with email/password. User is created in Supabase Auth (auth.users) and will appear in your Supabase project. */
-  const signUpWithEmail = async (email, password) => {
+  const signUpWithEmail = async (email, password, captchaToken) => {
+    const opts = { emailRedirectTo: `${window.location.origin}/auth/callback` };
+    if (captchaToken) opts.captchaToken = captchaToken;
     const { data, error } = await supabase.auth.signUp({
       email: email.trim(),
       password,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: opts,
     });
     if (error) throw error;
     return data;
   };
 
   /** Sign in with email/password (Supabase Auth). */
-  const signInWithEmail = async (email, password) => {
+  const signInWithEmail = async (email, password, captchaToken) => {
+    const opts = captchaToken ? { captchaToken } : {};
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password,
+      options: opts,
     });
     if (error) throw error;
     return data;

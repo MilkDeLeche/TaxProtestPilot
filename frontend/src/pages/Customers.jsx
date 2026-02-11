@@ -263,7 +263,7 @@ export default function Customers() {
   const getLastYearTotal = (c) => chargeSummary[customerKey(c)]?.lastYearTotal ?? null;
 
   return (
-    <div className="p-4 md:p-6 h-[calc(100vh-1rem)] overflow-hidden flex flex-col">
+    <div className="p-4 md:p-6 h-[calc(100vh-4.5rem)] md:h-[calc(100vh-1rem)] overflow-hidden flex flex-col">
       {!canManageClients && (
         <div className="mb-4 shrink-0 rounded-lg bg-[#1e40af]/10 border border-[#1e40af]/20 px-4 py-3 flex items-center justify-between gap-4">
           <p className="text-sm text-slate-700">

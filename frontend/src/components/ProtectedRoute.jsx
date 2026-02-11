@@ -38,7 +38,7 @@ export const ProtectedRoute = () => {
   return (
     <div className={`min-h-screen bg-slate-50 ${isCustomers ? 'h-screen overflow-hidden' : ''}`}>
       <Sidebar />
-      <main className={`ml-64 min-h-screen ${isCustomers ? 'h-[calc(100vh)] overflow-hidden' : ''}`}>
+      <main className={`pt-14 md:pt-0 md:ml-64 min-h-screen ${isCustomers ? 'h-[calc(100vh)] overflow-hidden' : ''}`}>
         <Outlet />
       </main>
     </div>

@@ -163,10 +163,10 @@ export default function Dashboard() {
   }, [isSupabaseUser, user?.id]);
 
   return (
-    <div className="p-8 md:p-12">
+    <div className="p-4 sm:p-6 md:p-12">
       {/* Header */}
-      <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+      <div className="mb-6 md:mb-10">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
           Welcome back, {user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'}
         </h1>
         <p className="text-slate-500 mt-2">
