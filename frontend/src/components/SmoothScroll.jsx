@@ -31,8 +31,10 @@ export function SmoothScroll({ children }) {
     });
 
     lenis.scrollTo(0, { immediate: true });
+    window.__lenis = lenis;
 
     return () => {
+      delete window.__lenis;
       lenis.destroy();
     };
   }, []);

@@ -4,6 +4,7 @@ import { Toaster } from "./components/ui/sonner";
 import { AuthProvider } from "./context/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { SmoothScroll } from "./components/SmoothScroll";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -25,6 +26,7 @@ import SetNewPassword from "./pages/SetNewPassword";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <SmoothScroll>
         <AuthProvider>
           <Routes>

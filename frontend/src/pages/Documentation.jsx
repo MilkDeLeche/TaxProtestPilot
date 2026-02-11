@@ -1,20 +1,42 @@
 import { Link } from 'react-router-dom';
 import { LandingNavbar } from '../components/landing/LandingNavbar';
 import { Footer } from '../components/landing/Footer';
+import { ContainerScroll } from '../components/ui/container-scroll-animation';
 
 export default function Documentation() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <LandingNavbar />
 
-      {/* Hero – Technical Specifications (light, as before) */}
-      <div className="bg-white dark:bg-gray-900">
-        <div aria-hidden="true" className="relative">
-          <img src="/images/homepage.png" alt="" className="h-96 w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-gray-900" />
-        </div>
+      {/* Hero – Scroll animation */}
+      <div className="flex flex-col overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#0f172a] pb-24">
+        <ContainerScroll
+          titleComponent={
+            <>
+              <h1 className="text-4xl font-semibold text-white" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                From your spreadsheet to <br />
+                <span className="text-4xl md:text-[5rem] font-bold mt-1 leading-none text-white">
+                  QuickBooks
+                </span>
+              </h1>
+              <p className="mt-4 text-lg text-blue-200/90 max-w-2xl mx-auto">
+                Upload a CSV, map columns, run the savings calculator, save the batch, and export. One workflow from data to invoices.
+              </p>
+            </>
+          }
+        >
+          <img
+            src="/images/demohero.png"
+            alt="Tax Protest Pilot dashboard"
+            className="mx-auto rounded-2xl object-cover h-full w-full object-left-top"
+            draggable={false}
+          />
+        </ContainerScroll>
+      </div>
 
-        <div className="relative mx-auto -mt-12 max-w-7xl px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
+      {/* Technical Specifications */}
+      <div className="bg-white dark:bg-gray-900">
+        <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-16 sm:px-6 sm:pb-24 lg:px-8">
           <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">Technical Specifications</h2>
             <p className="mt-4 text-gray-500 dark:text-gray-400">How the dashboard gets data from your CSV, how to format it, and how to go from upload to QuickBooks-ready export. Prepare your file, map columns, calculate, save, and export.</p>
