@@ -80,7 +80,7 @@ export function AuthProvider({ children }) {
       mounted = false;
       subscription?.unsubscribe();
     };
-  }, []);
+  }, [apiToken, apiUser]);
 
   // Fetch subscription (plan) when user changes — only for Supabase auth users. Demo gets full (Enterprise) plan.
   useEffect(() => {
