@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../components/ui/accordion';
+import LiquidEther from '../components/ui/liquid-ether';
 
 const SUPPORT_EMAIL = 'support@taxprotestpilot.com';
 
@@ -187,32 +188,55 @@ export default function Support() {
               </form>
             </motion.section>
 
-            {/* FAQ */}
+            {/* FAQ with LiquidEther background */}
             <motion.section
-              className="rounded-2xl bg-white/5 border border-white/10 p-6 sm:p-8"
+              className="relative rounded-2xl border border-white/10 overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4 }}
             >
-              <h2 className="text-xl font-semibold text-white flex items-center gap-2 sm:text-2xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                <QuestionMarkCircleIcon className="w-6 h-6 text-blue-300" />
-                Frequently asked questions
-              </h2>
-              <p className="mt-2 text-gray-400 text-sm sm:text-base">
-                Quick answers to common questions. Can't find what you need? Use the contact form above.
-              </p>
-              <Accordion type="single" collapsible className="mt-6 w-full">
-                {faqs.map((faq, i) => (
-                  <AccordionItem key={i} value={`faq-${i}`} className="border-white/10">
-                    <AccordionTrigger className="text-left text-gray-200 hover:text-white py-4">
-                      {faq.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-gray-400 text-sm pb-4">
-                      {faq.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+              <div style={{ width: '100%', height: 600, position: 'relative' }}>
+                <LiquidEther
+                  colors={['#0f172a', '#1e40af', '#3b82f6', '#60a5fa']}
+                  mouseForce={20}
+                  cursorSize={100}
+                  isViscous
+                  viscous={30}
+                  iterationsViscous={32}
+                  iterationsPoisson={32}
+                  resolution={0.5}
+                  isBounce={false}
+                  autoDemo
+                  autoSpeed={0.5}
+                  autoIntensity={2.2}
+                  takeoverDuration={0.25}
+                  autoResumeDelay={3000}
+                  autoRampDuration={0.6}
+                  className="rounded-t-2xl"
+                />
+              </div>
+              <div className="absolute inset-0 bg-[#0f172a]/50 rounded-2xl z-[1] pointer-events-none" aria-hidden />
+              <div className="absolute inset-0 z-10 p-6 sm:p-8 overflow-auto">
+                <h2 className="text-xl font-semibold text-white flex items-center gap-2 sm:text-2xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                  <QuestionMarkCircleIcon className="w-6 h-6 text-blue-300" />
+                  Frequently asked questions
+                </h2>
+                <p className="mt-2 text-gray-400 text-sm sm:text-base">
+                  Quick answers to common questions. Can't find what you need? Use the contact form above.
+                </p>
+                <Accordion type="single" collapsible className="mt-6 w-full">
+                  {faqs.map((faq, i) => (
+                    <AccordionItem key={i} value={`faq-${i}`} className="border-white/10">
+                      <AccordionTrigger className="text-left text-gray-200 hover:text-white py-4">
+                        {faq.q}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-gray-400 text-sm pb-4">
+                        {faq.a}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
             </motion.section>
 
             {/* Direct email CTA */}

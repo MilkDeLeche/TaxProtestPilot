@@ -5,6 +5,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useAuth } from '../context/AuthContext';
 import { MotionButton } from '../components/MotionButton';
 import { GlowEffect } from '../components/ui/glow-effect';
+import Grainient from '../components/ui/grainient';
 
 const HCAPTCHA_SITEKEY = process.env.REACT_APP_HCAPTCHA_SITEKEY;
 
@@ -18,17 +19,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [bgLoaded, setBgLoaded] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(null);
   const captchaRef = useRef(null);
-
-  const BG_IMAGE = '/images/abstract-pastel-holographic-blurred-grainy-gradien-2026-01-08-07-39-02-utc.jpg';
-
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => setBgLoaded(true);
-    img.src = BG_IMAGE;
-  }, []);
 
   useEffect(() => {
     if (!user || loading) return;
@@ -117,16 +109,15 @@ export default function Login() {
   }
 
   return (
-    <div
-      className="h-screen overflow-hidden flex flex-col justify-center sm:px-4 lg:px-8 transition-colors duration-300"
-      style={{
-        backgroundImage: bgLoaded ? `url(${BG_IMAGE})` : 'linear-gradient(135deg, #1e3a8a 0%, #312e81 50%, #1e293b 100%)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <div className="absolute inset-0 bg-black/15 pointer-events-none" aria-hidden />
+    <div className="relative h-screen overflow-hidden flex flex-col justify-center sm:px-4 lg:px-8 transition-colors duration-300 bg-[#0f172a]">
+      <Grainient
+        color1="#1e40af"
+        color2="#3b82f6"
+        color3="#0f172a"
+        timeSpeed={0.2}
+        grainAmount={0.08}
+      />
+      <div className="absolute inset-0 bg-black/10 pointer-events-none" aria-hidden />
       <div className="relative z-10 flex flex-col justify-center items-center min-h-0 flex-1 py-4 sm:py-6 overflow-hidden">
         <div className="w-full sm:max-w-[420px] px-4 sm:px-0 flex flex-col items-center">
           <div
